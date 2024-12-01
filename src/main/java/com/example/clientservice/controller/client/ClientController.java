@@ -19,5 +19,4 @@ public class ClientController {
     public ClientDto addClient(@RequestBody ClientDto clientDto) {
         return clientService.addClient(clientDto);
     }
-
 }

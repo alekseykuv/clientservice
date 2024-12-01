@@ -16,7 +16,6 @@ public class ClientService {
     private final ClientMapper clientMapper;
     private final ClientValidator clientValidator;
 
-
     public ClientDto addClient(ClientDto clientDto) {
         clientValidator.checkNameIsNull(clientDto);
 
