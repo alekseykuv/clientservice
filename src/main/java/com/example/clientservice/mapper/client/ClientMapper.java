@@ -1,8 +1,10 @@
 package com.example.clientservice.mapper.client;
 
 import com.example.clientservice.dto.client.ClientDto;
+import com.example.clientservice.dto.client.EmailDto;
 import com.example.clientservice.dto.client.PhoneDto;
 import com.example.clientservice.model.client.Client;
+import com.example.clientservice.model.client.Email;
 import com.example.clientservice.model.client.Phone;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
@@ -17,6 +19,10 @@ public interface ClientMapper {
     PhoneDto toDto(Phone phone);
 
     Phone toEntity(PhoneDto phoneDto);
+
+    EmailDto toDto(Email email);
+
+    Email toEntity(EmailDto emailDto);
 
 
 }

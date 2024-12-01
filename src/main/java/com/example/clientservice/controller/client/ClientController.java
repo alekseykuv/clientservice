@@ -1,6 +1,7 @@
 package com.example.clientservice.controller.client;
 
 import com.example.clientservice.dto.client.ClientDto;
+import com.example.clientservice.dto.client.EmailDto;
 import com.example.clientservice.dto.client.PhoneDto;
 import com.example.clientservice.service.client.ClientService;
 import jakarta.validation.Valid;
@@ -28,4 +29,8 @@ public class ClientController {
         clientService.addPhone(id, phoneDto);
     }
 
+    @PostMapping("/{id}/contacts/email")
+    public void addEmail(@PathVariable int id, @Valid @RequestBody EmailDto emailDto) {
+        clientService.addEmail(id, emailDto);
+    }
 }

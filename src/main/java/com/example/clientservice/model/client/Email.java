@@ -5,34 +5,30 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @Data
 @Entity
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "clients")
-public class Client {
+@Table(name = "client_emails")
+public class Email {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "name", nullable = false, length = 64)
-    private String name;
+    @Column(name = "email", nullable = false, length = 64)
+    private String email;
 
-    @OneToMany(mappedBy = "client")
-    private List<Phone> phones;
-
-    @OneToMany(mappedBy = "client")
-    private List<Email> emails;
+    @ManyToOne
+    @JoinColumn(name = "client_id", nullable = false)
+    private Client client;
 }
-

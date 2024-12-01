@@ -1,6 +1,7 @@
 package com.example.clientservice.validator;
 
 import com.example.clientservice.dto.client.ClientDto;
+import com.example.clientservice.dto.client.EmailDto;
 import com.example.clientservice.dto.client.PhoneDto;
 import com.example.clientservice.exception.DataClientValidation;
 import lombok.extern.slf4j.Slf4j;
@@ -21,6 +22,13 @@ public class ClientValidator {
         if (phoneDto.getNumber() == null || phoneDto.getNumber().isEmpty()) {
             log.error("The number field must not be null or empty");
             throw new DataClientValidation("The number field must not be null or empty");
+        }
+    }
+
+    public void checkEmailIsNull(EmailDto emailDto) {
+        if (emailDto.getEmail() == null || emailDto.getEmail().isEmpty()) {
+            log.error("The email field must not be null or empty");
+            throw new DataClientValidation("The email field must not be null or empty");
         }
     }
 }

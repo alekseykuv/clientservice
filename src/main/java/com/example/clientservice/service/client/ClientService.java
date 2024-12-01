@@ -1,11 +1,14 @@
 package com.example.clientservice.service.client;
 
 import com.example.clientservice.dto.client.ClientDto;
+import com.example.clientservice.dto.client.EmailDto;
 import com.example.clientservice.dto.client.PhoneDto;
 import com.example.clientservice.mapper.client.ClientMapper;
 import com.example.clientservice.model.client.Client;
+import com.example.clientservice.model.client.Email;
 import com.example.clientservice.model.client.Phone;
 import com.example.clientservice.repository.client.ClientRepository;
+import com.example.clientservice.repository.client.EmailRepository;
 import com.example.clientservice.repository.client.PhoneRepository;
 import com.example.clientservice.validator.ClientValidator;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +21,7 @@ public class ClientService {
 
     private final ClientRepository clientRepository;
     private final PhoneRepository phoneRepository;
+    private final EmailRepository emailRepository;
     private final ClientMapper clientMapper;
     private final ClientValidator clientValidator;
 
@@ -36,5 +40,13 @@ public class ClientService {
 
         phoneRepository.addPhoneByClientId(id, phone.getNumber());
 
+    }
+
+    @Transactional
+    public void addEmail(long id, EmailDto emailDto) {
+        clientValidator.checkEmailIsNull(emailDto);
+        Email email = clientMapper.toEntity(emailDto);
+
+        emailRepository.addEmailByClientId(id, email.getEmail());
     }
 }
