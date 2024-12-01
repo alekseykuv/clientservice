@@ -15,6 +15,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class ClientService {
@@ -48,5 +50,10 @@ public class ClientService {
         Email email = clientMapper.toEntity(emailDto);
 
         emailRepository.addEmailByClientId(id, email.getEmail());
+    }
+
+    @Transactional(readOnly = true)
+    public List<ClientDto> getClients() {
+        return clientMapper.toClientsDto(clientRepository.findAll());
     }
 }

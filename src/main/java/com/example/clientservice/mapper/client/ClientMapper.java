@@ -9,6 +9,8 @@ import com.example.clientservice.model.client.Phone;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 
+import java.util.List;
+
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface ClientMapper {
 
@@ -23,6 +25,10 @@ public interface ClientMapper {
     EmailDto toDto(Email email);
 
     Email toEntity(EmailDto emailDto);
+
+    List<ClientDto> toClientsDto(List<Client> clients);
+
+    List<Client> toClients(List<ClientDto> clientsDto);
 
 
 }
