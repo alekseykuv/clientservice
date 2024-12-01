@@ -1,25 +1,40 @@
 package com.example.clientservice.service.client;
 
 import com.example.clientservice.dto.client.ClientDto;
+import com.example.clientservice.dto.client.PhoneDto;
 import com.example.clientservice.mapper.client.ClientMapper;
 import com.example.clientservice.model.client.Client;
+import com.example.clientservice.model.client.Phone;
 import com.example.clientservice.repository.client.ClientRepository;
+import com.example.clientservice.repository.client.PhoneRepository;
 import com.example.clientservice.validator.ClientValidator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
 public class ClientService {
 
     private final ClientRepository clientRepository;
+    private final PhoneRepository phoneRepository;
     private final ClientMapper clientMapper;
     private final ClientValidator clientValidator;
 
+    @Transactional
     public ClientDto addClient(ClientDto clientDto) {
         clientValidator.checkNameIsNull(clientDto);
 
         Client client = clientMapper.toEntity(clientDto);
         return clientMapper.toDto(clientRepository.save(client));
+    }
+
+    @Transactional
+    public void addPhone(long id, PhoneDto phoneDto) {
+        clientValidator.checkPhoneIsNull(phoneDto);
+        Phone phone = clientMapper.toEntity(phoneDto);
+
+        phoneRepository.addPhoneByClientId(id, phone.getNumber());
+
     }
 }

@@ -1,8 +1,11 @@
 package com.example.clientservice.controller.client;
 
 import com.example.clientservice.dto.client.ClientDto;
+import com.example.clientservice.dto.client.PhoneDto;
 import com.example.clientservice.service.client.ClientService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,4 +22,10 @@ public class ClientController {
     public ClientDto addClient(@RequestBody ClientDto clientDto) {
         return clientService.addClient(clientDto);
     }
+
+    @PostMapping("/{id}/contacts/phone")
+    public void addPhone(@PathVariable int id, @Valid @RequestBody PhoneDto phoneDto) {
+        clientService.addPhone(id, phoneDto);
+    }
+
 }
