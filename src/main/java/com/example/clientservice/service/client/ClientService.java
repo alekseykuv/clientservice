@@ -11,6 +11,7 @@ import com.example.clientservice.repository.client.ClientRepository;
 import com.example.clientservice.repository.client.EmailRepository;
 import com.example.clientservice.repository.client.PhoneRepository;
 import com.example.clientservice.validator.ClientValidator;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -55,5 +56,11 @@ public class ClientService {
     @Transactional(readOnly = true)
     public List<ClientDto> getClients() {
         return clientMapper.toClientsDto(clientRepository.findAll());
+    }
+
+    @Transactional(readOnly = true)
+    public ClientDto getClient(long id) {
+        return clientRepository.findById(id).map(clientMapper::toDto)
+                .orElseThrow(() -> new EntityNotFoundException("Client with id " + id + " not found"));
     }
 }

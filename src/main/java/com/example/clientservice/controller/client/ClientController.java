@@ -28,17 +28,22 @@ public class ClientController {
     }
 
     @PostMapping("/{id}/contacts/phone")
-    public void addPhone(@PathVariable int id, @Valid @RequestBody PhoneDto phoneDto) {
+    public void addPhone(@PathVariable("id") long id, @Valid @RequestBody PhoneDto phoneDto) {
         clientService.addPhone(id, phoneDto);
     }
 
     @PostMapping("/{id}/contacts/email")
-    public void addEmail(@PathVariable int id, @Valid @RequestBody EmailDto emailDto) {
+    public void addEmail(@PathVariable("id") long id, @Valid @RequestBody EmailDto emailDto) {
         clientService.addEmail(id, emailDto);
     }
 
     @GetMapping()
     public List<ClientDto> getClients() {
         return clientService.getClients();
+    }
+
+    @GetMapping("/{id}")
+    public ClientDto getClient(@PathVariable("id") long id) {
+        return clientService.getClient(id);
     }
 }
