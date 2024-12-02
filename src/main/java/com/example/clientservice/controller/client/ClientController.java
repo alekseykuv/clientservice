@@ -51,4 +51,9 @@ public class ClientController {
     public List<String> getContactsClient(@PathVariable("id") long id) {
         return clientService.getContactsClient(id);
     }
+
+    @GetMapping("/{id}/contacts/phone")
+    public List<String> getPhoneContacts(@PathVariable("id") long id) {
+        return clientService.getPhoneContacts(id);
+    }
 }

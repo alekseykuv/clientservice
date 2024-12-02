@@ -67,14 +67,25 @@ public class ClientService {
 
     @Transactional(readOnly = true)
     public List<String> getContactsClient(long id) {
-        if (!clientRepository.existsById(id)) {
-            throw new EntityNotFoundException("Client with id " + id + " not found");
-        }
+        checkExistsClientInBd(id);
 
         List<String> contacts = new ArrayList<>();
         contacts.addAll(emailRepository.findEmailsByClientId(id));
         contacts.addAll(phoneRepository.findPhonesByClientId(id));
 
         return contacts;
+    }
+
+    @Transactional
+    public List<String> getPhoneContacts(long id) {
+        checkExistsClientInBd(id);
+
+        return phoneRepository.findPhonesByClientId(id);
+    }
+
+    private void checkExistsClientInBd(long id) {
+        if (!clientRepository.existsById(id)) {
+            throw new EntityNotFoundException("Client with id " + id + " not found");
+        }
     }
 }
