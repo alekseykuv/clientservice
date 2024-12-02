@@ -16,6 +16,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -62,5 +63,18 @@ public class ClientService {
     public ClientDto getClient(long id) {
         return clientRepository.findById(id).map(clientMapper::toDto)
                 .orElseThrow(() -> new EntityNotFoundException("Client with id " + id + " not found"));
+    }
+
+    @Transactional(readOnly = true)
+    public List<String> getContactsClient(long id) {
+        if (!clientRepository.existsById(id)) {
+            throw new EntityNotFoundException("Client with id " + id + " not found");
+        }
+
+        List<String> contacts = new ArrayList<>();
+        contacts.addAll(emailRepository.findEmailsByClientId(id));
+        contacts.addAll(phoneRepository.findPhonesByClientId(id));
+
+        return contacts;
     }
 }

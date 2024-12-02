@@ -46,4 +46,9 @@ public class ClientController {
     public ClientDto getClient(@PathVariable("id") long id) {
         return clientService.getClient(id);
     }
+
+    @GetMapping("/{id}/contacts")
+    public List<String> getContactsClient(@PathVariable("id") long id) {
+        return clientService.getContactsClient(id);
+    }
 }
