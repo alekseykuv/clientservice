@@ -27,12 +27,12 @@ public class ClientController {
         return clientService.addClient(clientDto);
     }
 
-    @PostMapping("/{id}/contacts/phone")
+    @PostMapping("/{id}/contacts/phones")
     public void addPhone(@PathVariable("id") long id, @Valid @RequestBody PhoneDto phoneDto) {
         clientService.addPhone(id, phoneDto);
     }
 
-    @PostMapping("/{id}/contacts/email")
+    @PostMapping("/{id}/contacts/emails")
     public void addEmail(@PathVariable("id") long id, @Valid @RequestBody EmailDto emailDto) {
         clientService.addEmail(id, emailDto);
     }
@@ -52,8 +52,13 @@ public class ClientController {
         return clientService.getContactsClient(id);
     }
 
-    @GetMapping("/{id}/contacts/phone")
+    @GetMapping("/{id}/contacts/phones")
     public List<String> getPhoneContacts(@PathVariable("id") long id) {
         return clientService.getPhoneContacts(id);
+    }
+
+    @GetMapping("/{id}/contacts/emails")
+    public List<String> getEmailContacts(@PathVariable("id") long id) {
+        return clientService.getEmailContacts(id);
     }
 }

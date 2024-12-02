@@ -76,11 +76,18 @@ public class ClientService {
         return contacts;
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public List<String> getPhoneContacts(long id) {
         checkExistsClientInBd(id);
 
         return phoneRepository.findPhonesByClientId(id);
+    }
+
+    @Transactional(readOnly = true)
+    public List<String> getEmailContacts(long id) {
+        checkExistsClientInBd(id);
+
+        return emailRepository.findEmailsByClientId(id);
     }
 
     private void checkExistsClientInBd(long id) {
