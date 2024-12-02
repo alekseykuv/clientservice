@@ -40,6 +40,8 @@ public class ClientService {
     @Transactional
     public void addPhone(long id, PhoneDto phoneDto) {
         clientValidator.checkPhoneIsNull(phoneDto);
+        checkExistsClientInBd(id);
+
         Phone phone = clientMapper.toEntity(phoneDto);
 
         phoneRepository.addPhoneByClientId(id, phone.getNumber());
@@ -49,6 +51,8 @@ public class ClientService {
     @Transactional
     public void addEmail(long id, EmailDto emailDto) {
         clientValidator.checkEmailIsNull(emailDto);
+        checkExistsClientInBd(id);
+
         Email email = clientMapper.toEntity(emailDto);
 
         emailRepository.addEmailByClientId(id, email.getEmail());
