@@ -7,6 +7,7 @@ import lombok.Data;
 @Data
 @Builder
 public class EmailDto {
+
     private long id;
 
     @Email(message = "Invalid email format")

@@ -7,6 +7,7 @@ import lombok.Data;
 @Data
 @Builder
 public class PhoneDto {
+
     private long id;
 
     @Pattern(regexp = "^[0-9]+$", message = "Phone number can only contain numbers")

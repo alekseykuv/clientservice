@@ -45,7 +45,6 @@ public class ClientService {
         Phone phone = clientMapper.toEntity(phoneDto);
 
         phoneRepository.addPhoneByClientId(id, phone.getNumber());
-
     }
 
     @Transactional
